@@ -16,9 +16,9 @@ autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
 autocmd FileType markdown set wrap|set linebreak
 
 autocmd FileType java iabbrev <silent> <buffer> for for<C-R>=JAVA_replace("", "normal i () {\n}\ekf(\el")<CR><C-R>=JAVA_EatChar('\s')<CR>
-autocmd FileType java iabbrev <silent> <buffer> fori for (int i=0;; i++) {<CR>}<Esc>k^f;a <C-R>=JAVA_EatChar('\s')<CR>
-autocmd FileType java iabbrev <silent> <buffer> forj for (int j=0;; j++) {<CR>}<Esc>k^f;a <C-R>=JAVA_EatChar('\s')<CR>
-autocmd FileType java iabbrev <silent> <buffer> fork for (int k=0;; k++) {<CR>}<Esc>k^f;a <C-R>=JAVA_EatChar('\s')<CR>
+autocmd FileType java iabbrev <silent> <buffer> fori for (int i = 0;; i++) {<CR>}<Esc>k^f;a <C-R>=JAVA_EatChar('\s')<CR>
+autocmd FileType java iabbrev <silent> <buffer> forj for (int j = 0;; j++) {<CR>}<Esc>k^f;a <C-R>=JAVA_EatChar('\s')<CR>
+autocmd FileType java iabbrev <silent> <buffer> fork for (int k = 0;; k++) {<CR>}<Esc>k^f;a <C-R>=JAVA_EatChar('\s')<CR>
 autocmd FileType java iabbrev <silent> <buffer> forint for (int) {<CR>}<Esc>kf)i
 autocmd FileType java iabbrev <silent> <buffer> foriti for (Iterator i=;i.hasNext();) {<CR>}<Esc>kf=a<C-R>=JAVA_EatChar('\s')<CR>
 autocmd FileType java iabbrev <silent> <buffer> forit for (Iterator) {<CR>}<Esc>kf)i
