@@ -11,6 +11,7 @@ function much; git; end
 function so; git; end
 
 # Connection
+function ssh; export TERM='xterm-256color'; command ssh $argv; export TERM='rxvt-unicode-256color'; end
 function ssh-kth; ssh -Y perhells@u-shell.csc.kth.se; end
 function ssh-link-kth; ssh -L 1449:localhost:1449 perhells@u-shell.csc.kth.se; end
 function sftp-kth; sftp perhells@u-shell.csc.kth.se; end
@@ -30,6 +31,7 @@ function grep; command grep --color=auto $argv; end
 function top; atop; end
 function mkdir; command mkdir -pv $argv; end
 function visudo; sudo EDITOR=vim visudo; end
+function tree; command tree -C; end
 
 # Server functionality
 function restart_server; sudo supervisorctl restart maltlager ; sudo systemctl restart nginx; end
