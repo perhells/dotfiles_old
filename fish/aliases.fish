@@ -114,3 +114,5 @@ else
     echo "No difference between new and old mirrorlist"
 end;
 end
+
+function matlab-term; matlab -nosplash -nodesktop; end
