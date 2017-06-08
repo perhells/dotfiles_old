@@ -117,4 +117,8 @@ else
 end;
 end
 
+# Remove all docker containers, images, volumes
 function docker-clean; docker stop (docker ps -aq); docker rm (docker ps -aq); docker rmi (docker images -aq) --force; docker volume rm (docker volume ls -q); docker ps -a; docker images -a; docker volume ls; end
+
+# Launch matlab in terminal mode
+function matlab-term; matlab -nosplash -nodesktop; end
