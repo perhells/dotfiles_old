@@ -4,11 +4,11 @@ function ea; vim ~/.config/fish/aliases.fish; ra; end
 
 # Git
 function wow; git status; end
-function such; git; end
-function very; git; end
-function many; git; end
-function much; git; end
-function so; git; end
+function such; git $argv; end
+function very; git $argv; end
+function many; git $argv; end
+function much; git $argv; end
+function so; git $argv; end
 
 # Connection
 function ssh; export TERM='xterm-256color'; command ssh $argv; export TERM='rxvt-unicode-256color'; end
