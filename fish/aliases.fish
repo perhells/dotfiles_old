@@ -31,7 +31,7 @@ function grep; command grep --color=auto $argv; end
 function top; atop; end
 function mkdir; command mkdir -pv $argv; end
 function visudo; sudo EDITOR=vim visudo; end
-function tree; command tree -C; end
+function tree; command tree -C $argv; end
 
 # Server functionality
 function restart_server; sudo supervisorctl restart maltlager ; sudo systemctl restart nginx; end
