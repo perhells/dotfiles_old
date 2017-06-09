@@ -79,7 +79,7 @@ set hidden		" Hide buffers when they are abandoned
 set lazyredraw
 set title
 set autoread
-set confirm
+"set confirm
 set noswapfile
 
 " Uncomment the following to have Vim jump to the last position when
