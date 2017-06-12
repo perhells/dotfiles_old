@@ -103,10 +103,14 @@ function! ToggleMouse()
         " disable mouse
         set mouse=
         echo "Mouse disabled"
+        set scrolloff=999
+        set sidescrolloff=999
     else
         " enable mouse everywhere
         set mouse=a
         echo "Mouse enabled"
+        set scrolloff=0
+        set sidescrolloff=0
     endif
 endfunc
 
