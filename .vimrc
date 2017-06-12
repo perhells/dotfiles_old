@@ -91,11 +91,11 @@ endif
 nmap <F4> :w !clear & python<CR>
 nmap <F5> :w<CR>:silent !mdpdf % &<CR>:redraw!<CR>
 
-for prefix in ['i', 'n', 'v']
-    for key in ['<Up>', '<Down>', '<Left>', '<Right>']
-        exe prefix . "noremap " . key . " <Nop>"
-    endfor
-endfor
+"for prefix in ['i', 'n', 'v']
+"    for key in ['<Up>', '<Down>', '<Left>', '<Right>']
+"        exe prefix . "noremap " . key . " <Nop>"
+"    endfor
+"endfor
 
 function! ToggleMouse()
     " check if mouse is enabled
