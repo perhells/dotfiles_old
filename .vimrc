@@ -72,9 +72,13 @@ set showmatch		" Show matching brackets.
 set ignorecase		" Do case insensitive matching
 set smartcase		" Do smart case matching
 set incsearch		" Incremental search
+set hlsearch
 "set autowrite		" Automatically save before commands like :next and :make
 set hidden		" Hide buffers when they are abandoned
 "set mouse=a		" Enable mouse usage (all modes)
+
+" <Ctrl-l> redraws the screen and removes any search highlighting.
+nnoremap <silent> <C-l> :nohl<CR><C-l>
 
 set lazyredraw
 set title
@@ -119,13 +123,11 @@ nnoremap <F3> :call ToggleMouse()<CR>
 set pastetoggle=<F2>
 set showmode
 
-if v:progname != "vimdiff"
+if &diff
+    cabbrev q qa
+else
     autocmd VimEnter * NERDTree
     autocmd VimEnter * wincmd p
-endif
-
-if v:progname == "vimdiff"
-    cabbrev q qa
 endif
 
 function! s:CloseIfOnlyControlWinLeft()
