@@ -28,6 +28,27 @@ function prompt_dir
     end
 end
 
+function git_branch
+    #set -l git_branches (git branch -l ^/dev/null | sed -e "s/^\* //")
+    set -l git_branches (git rev-parse --abbrev-ref HEAD ^/dev/null)
+    set -l git_status (git status --porcelain ^/dev/null)
+    set -l infocolor 4ca4b5
+    set -l delimcolor blue
+    set -l pathcolor red
+    if test "$git_branches"
+        set_color $delimcolor
+        echo -n "("
+        if test "$git_status"
+            set_color $pathcolor
+            echo -n "*"
+        end
+        set_color $infocolor
+        echo -n "$git_branches"
+        set_color $delimcolor
+        echo -n ")"
+    end
+end
+
 function fish_prompt
     set -l infocolor 4ca4b5
     set -l delimcolor blue
@@ -47,6 +68,7 @@ end
 function fish_right_prompt
     set -l delimcolor blue
     set -l infocolor 4ca4b5
+    echo -n (git_branch)
     set_color $delimcolor
     echo -n "["
     set_color $infocolor
