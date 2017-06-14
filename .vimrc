@@ -31,6 +31,11 @@ autocmd FileType java iabbrev <silent> <buffer> profun protected() {<CR>}<Esc>kf
 autocmd FileType java iabbrev <silent> <buffer> tryc try {<CR>} catch () {}<Esc>F)i<C-R>=JAVA_EatChar('\s')<CR>
 autocmd FileType java iabbrev <silent> <buffer> trya try {<CR>} catch (Exception e) {}<Esc>O<C-R>=JAVA_EatChar('\s')<CR>
 
+augroup nonvim
+    au!
+    au BufRead *.png,*.jpg,*.pdf,*.gif,*.xls*,*.ppt*,*.doc*,*.rtf sil exe "!open " . shellescape(expand("%:p")) | bd | let &ft=&ft
+augroup end
+
 func! JAVA_EatChar(pat)
     let c=nr2char(getchar())
     return (c =~ a:pat) ? '' : c
