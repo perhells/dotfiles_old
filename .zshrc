@@ -90,6 +90,6 @@ stty -ixon
 
 bindkey '^W' vi-backward-kill-word
 
-if [[ "$TERM" == *rxvt* || "$TERM" == *xterm* ]]; then
-    exec fish
-fi
+#if [[ "$TERM" == *rxvt* || "$TERM" == *xterm* ]]; then
+#    exec fish
+#fi
