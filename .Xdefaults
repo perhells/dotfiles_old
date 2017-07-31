@@ -3,6 +3,13 @@ URxvt*borderLess:           false
 URxvt*externalBorder:       0
 URxvt*internalBorder:       0
 
+! disable ctrl-shift
+URxvt*iso14755: False 
+URxvt*iso14755_52: False
+
+URxvt.keysym.Shift-Up: command:\033]720;1\007
+URxvt.keysym.Shift-Down: command:\033]721;1\007
+
 !
 ! scrollbar
 !
