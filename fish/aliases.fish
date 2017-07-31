@@ -26,12 +26,13 @@ function network; sudo systemctl start NetworkManager; end
 
 # Comfort
 function ..; cd ..; end
-function ls; command ls -lh --color $argv; end
+function ls; command ls -lh --group-directories-first --color $argv; end
+function lsc; command ls $argv; end
 function grep; command grep --color=auto $argv; end
 function top; atop; end
 function mkdir; command mkdir -pv $argv; end
 function visudo; sudo EDITOR=vim visudo; end
-function tree; command tree -C $argv; end
+function tree; command tree --dirsfirst -C $argv; end
 
 # Server functionality
 function restart_server; sudo supervisorctl restart maltlager ; sudo systemctl restart nginx; end
@@ -93,9 +94,6 @@ function pdf; newworkspace zathura $argv &; end
 # Open files
 function open; command xdg-open $argv 2> /dev/null &; end
 
-# Temporary for a lab
-function read_log; tail -f /home/per/intnet16/labb5/apache-tomcat-8.5.4/logs/catalina.out; end
-
 # Runs and times a program in bash
 function time; bash -c "time $argv"; end
 
@@ -122,3 +120,7 @@ function docker-clean; docker stop (docker ps -aq); docker rm (docker ps -aq); d
 
 # Launch matlab in terminal mode
 function matlab-term; matlab -nosplash -nodesktop; end
+
+# LDAP
+function ldapgroups; ldapsearch -LLL -x -h ldap.dewire.com -b dc=dewire,dc=com member=uid=$argv,ou=people,dc=dewire,dc=com cn; end
+function ldapmembers; ldapsearch -LLL -x -h ldap.dewire.com -b dc=dewire,dc=com cn=$argv member; end
