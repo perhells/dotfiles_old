@@ -31,10 +31,8 @@ autocmd FileType java iabbrev <silent> <buffer> profun protected() {<CR>}<Esc>kf
 autocmd FileType java iabbrev <silent> <buffer> tryc try {<CR>} catch () {}<Esc>F)i<C-R>=JAVA_EatChar('\s')<CR>
 autocmd FileType java iabbrev <silent> <buffer> trya try {<CR>} catch (Exception e) {}<Esc>O<C-R>=JAVA_EatChar('\s')<CR>
 
-augroup nonvim
-    au!
-    au BufRead *.png,*.jpg,*.pdf,*.gif,*.xls*,*.ppt*,*.doc*,*.rtf sil exe "!open " . shellescape(expand("%:p")) | bd | let &ft=&ft
-augroup end
+au BufRead *.py nmap <F4> :w !clear & python<CR>
+au Bufread *.md nmap <F4> :w<CR>:silent !mdpdf % &<CR>:redraw!<CR>
 
 func! JAVA_EatChar(pat)
     let c=nr2char(getchar())
@@ -67,19 +65,21 @@ set number
 set backspace=2
 set scrolloff=999
 set sidescrolloff=999
+set linebreak
+set foldmethod=manual
 
 colorscheme Monokai
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
-set showcmd		" Show (partial) command in status line.
+set showcmd		    " Show (partial) command in status line.
 set showmatch		" Show matching brackets.
 set ignorecase		" Do case insensitive matching
 set smartcase		" Do smart case matching
 set incsearch		" Incremental search
-set hlsearch
+set hlsearch        " Highlight matches
 "set autowrite		" Automatically save before commands like :next and :make
-set hidden		" Hide buffers when they are abandoned
+set hidden		    " Hide buffers when they are abandoned
 "set mouse=a		" Enable mouse usage (all modes)
 
 " <Ctrl-l> redraws the screen and removes any search highlighting.
@@ -91,14 +91,13 @@ set autoread
 "set confirm
 set noswapfile
 
-" Uncomment the following to have Vim jump to the last position when
-" reopening a file
+" Whitespace/special chars for list
+set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+
+" Jump to the last position when reopening a file
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
-
-nmap <F4> :w !clear & python<CR>
-nmap <F5> :w<CR>:silent !mdpdf % &<CR>:redraw!<CR>
 
 "for prefix in ['i', 'n', 'v']
 "    for key in ['<Up>', '<Down>', '<Left>', '<Right>']
@@ -123,10 +122,25 @@ function! ToggleMouse()
     endif
 endfunc
 
+function ToggleWrap()
+endfunction
+
+function! ToggleWrap()
+    if (&wrap == 1)
+        set nowrap
+        echo "Wrap disabled"
+    else
+        set wrap
+        echo "Wrap enabled"
+    endif
+endfunc
+
 nnoremap <F2> :set invpaste paste?<CR>
 nnoremap <F3> :call ToggleMouse()<CR>
 set pastetoggle=<F2>
 set showmode
+
+nnoremap <F5> :call ToggleWrap()<CR>
 
 if &diff
     cabbrev q qa
@@ -134,6 +148,9 @@ else
     autocmd VimEnter * NERDTree
     autocmd VimEnter * wincmd p
 endif
+
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+vnoremap <Space> zf
 
 function! s:CloseIfOnlyControlWinLeft()
     if winnr("$") != 1
