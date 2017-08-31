@@ -18,7 +18,7 @@ function sftp-kth; sftp perhells@u-shell.csc.kth.se; end
 function ssh-rpi; export TERM='xterm-256color'; ssh per@gysingebryggeri.se; export TERM='rxvt-unicode-256color'; end
 function sftp-rpi; sftp per@gysingebryggeri.se; end
 function usb-serial; sudo screen /dev/ttyUSB0 115200; end
-function ssh-ec2; export TERM='xterm-256color'; ssh -i .ssh/gysinge.pem ec2-user@35.165.89.59; export TERM='rxvt-unicode-256color'; end
+function ssh-ec2; export TERM='xterm-256color'; ssh -i ~/.ssh/gysinge.pem ec2-user@35.165.89.59; export TERM='rxvt-unicode-256color'; end
 
 # Network
 function pong; ping 8.8.8.8 -c 3; end
