@@ -91,6 +91,9 @@ set autoread
 "set confirm
 set noswapfile
 
+au BufWinLeave * mkview
+au BufWinEnter * silent loadview
+
 " Whitespace/special chars for list
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
 
