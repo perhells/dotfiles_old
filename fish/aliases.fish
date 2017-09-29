@@ -34,6 +34,9 @@ function mkdir; command mkdir -pv $argv; end
 function visudo; sudo EDITOR=vim visudo; end
 function tree; command tree --dirsfirst -C $argv; end
 
+# Terminal export
+function sbt; export TERM='xterm'; command sbt $argv; export TERM='rxvt-unicode-256color'; end
+
 # Server functionality
 function restart_server; sudo supervisorctl restart maltlager ; sudo systemctl restart nginx; end
 function fix_permissions; sudo chown -R gysinge_maltlager:webapps /webapps; end
