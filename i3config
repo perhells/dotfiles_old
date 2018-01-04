@@ -235,6 +235,9 @@ bindsym Print exec scrot '%Y-%m-%d_%H:%M:%S_$wx$h.png' -e 'mv $f ~/Pictures/Scre
 bindsym --release Shift+Print exec scrot -s '%Y-%m-%d_%H:%M:%S_$wx$h.png' -e 'mv $f ~/Pictures/Screenshots/ && xclip -selection clipboard -t image/png ~/Pictures/Screenshots/$f'
 #bindsym --release Shift+Print exec scrot -s '~/Pictures/Screenshots/%Y-%m-%d_%T_$wx$h.png'
 
+# If you want to add drama, press F13
+bindsym F13 exec --no-startup-id /usr/local/bin/sound_effect.sh
+
 # Start dropbox
 exec --no-startup-id dropbox
 
