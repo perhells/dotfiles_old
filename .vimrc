@@ -15,46 +15,6 @@ autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
 
 autocmd FileType markdown set wrap|set linebreak
 
-autocmd FileType java iabbrev <silent> <buffer> for for<C-R>=JAVA_replace("", "normal i () {\n}\ekf(\el")<CR><C-R>=JAVA_EatChar('\s')<CR>
-autocmd FileType java iabbrev <silent> <buffer> fori for (int i = 0;; i++) {<CR>}<Esc>k^f;a <C-R>=JAVA_EatChar('\s')<CR>
-autocmd FileType java iabbrev <silent> <buffer> forj for (int j = 0;; j++) {<CR>}<Esc>k^f;a <C-R>=JAVA_EatChar('\s')<CR>
-autocmd FileType java iabbrev <silent> <buffer> fork for (int k = 0;; k++) {<CR>}<Esc>k^f;a <C-R>=JAVA_EatChar('\s')<CR>
-autocmd FileType java iabbrev <silent> <buffer> forint for (int) {<CR>}<Esc>kf)i
-autocmd FileType java iabbrev <silent> <buffer> foriti for (Iterator i=;i.hasNext();) {<CR>}<Esc>kf=a<C-R>=JAVA_EatChar('\s')<CR>
-autocmd FileType java iabbrev <silent> <buffer> forit for (Iterator) {<CR>}<Esc>kf)i
-autocmd FileType java iabbrev <silent> <buffer> while while<C-R>=JAVA_replace("", "normal i () {\n}\ekf(\el")<CR><C-R>=JAVA_EatChar('\s')<CR>
-autocmd FileType java iabbrev <silent> <buffer> pl <C-R>=JAVA_replace("normal isysout", "normal iSystem.out.println();\eF)")<CR><C-R>=JAVA_EatChar('\s')<CR>
-autocmd FileType java iabbrev <silent> <buffer> ple <C-R>=JAVA_replace("normal isyserr", "normal iSystem.err.println();\eF)")<CR><C-R>=JAVA_EatChar('\s')<CR>
-autocmd FileType java iabbrev <silent> <buffer> privfun private() {<CR>}<Esc>kf(i
-autocmd FileType java iabbrev <silent> <buffer> pubfun public() {<CR>}<Esc>kf(i
-autocmd FileType java iabbrev <silent> <buffer> profun protected() {<CR>}<Esc>kf(i
-autocmd FileType java iabbrev <silent> <buffer> tryc try {<CR>} catch () {}<Esc>F)i<C-R>=JAVA_EatChar('\s')<CR>
-autocmd FileType java iabbrev <silent> <buffer> trya try {<CR>} catch (Exception e) {}<Esc>O<C-R>=JAVA_EatChar('\s')<CR>
-
-au BufRead *.py nmap <F4> :w !clear & python<CR>
-au Bufread *.md nmap <F4> :w<CR>:silent !mdpdf % &<CR>:redraw!<CR>
-
-func! JAVA_EatChar(pat)
-    let c=nr2char(getchar())
-    return (c =~ a:pat) ? '' : c
-endfunc
-
-func! JAVA_insert_p()
-    exec "normal i \e"
-    let modeVal=synIDattr( synIDtrans( synID(line("."), col("."), 0)), "name")
-    return modeVal!=?"Constant" && modeVal!=?"Comment"
-endfunc
-
-func! JAVA_replace(name, repl)
-    if JAVA_insert_p()
-        exec a:repl
-        return ""
-    else
-        exec a:name
-        return " "
-    endif
-endfunc
-
 set smartindent
 set tabstop=4
 set softtabstop=4
@@ -70,17 +30,13 @@ set foldmethod=manual
 
 colorscheme Monokai
 
-" The following are commented out as they cause vim to behave a lot
-" differently from regular Vi. They are highly recommended though.
 set showcmd		    " Show (partial) command in status line.
 set showmatch		" Show matching brackets.
 set ignorecase		" Do case insensitive matching
 set smartcase		" Do smart case matching
 set incsearch		" Incremental search
 set hlsearch        " Highlight matches
-"set autowrite		" Automatically save before commands like :next and :make
 set hidden		    " Hide buffers when they are abandoned
-"set mouse=a		" Enable mouse usage (all modes)
 
 " <Ctrl-l> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
@@ -90,12 +46,6 @@ set title
 set autoread
 "set confirm
 set noswapfile
-
-au BufWinLeave * mkview
-au BufWinEnter * silent loadview
-
-" Whitespace/special chars for list
-set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
 
 " Jump to the last position when reopening a file
 if has("autocmd")
@@ -125,8 +75,18 @@ function! ToggleMouse()
     endif
 endfunc
 
-function ToggleWrap()
-endfunction
+" Whitespace/special chars for list
+set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+
+function! ToggleWhitespace()
+    if &list == 1
+        set nolist
+        echo "Whitespace highlighting disabled"
+    else
+        set list
+        echo "Whitespace highlighting enabled"
+    endif
+endfunc
 
 function! ToggleWrap()
     if (&wrap == 1)
@@ -138,12 +98,19 @@ function! ToggleWrap()
     endif
 endfunc
 
-nnoremap <F2> :set invpaste paste?<CR>
-nnoremap <F3> :call ToggleMouse()<CR>
-set pastetoggle=<F2>
-set showmode
+nnoremap <F2> :!echo -e "F3: Toggle paste\nF4: Toggle mouse\nF5: Toggle whitespace\nF6: Toggle wrap\nF7: Exec file"<CR>
 
-nnoremap <F5> :call ToggleWrap()<CR>
+set showmode
+set pastetoggle=<F3>
+
+nnoremap <F3> :set invpaste paste?<CR>
+nnoremap <F4> :call ToggleMouse()<CR>
+nnoremap <F5> :call ToggleWhitespace()<CR>
+nnoremap <F6> :call ToggleWrap()<CR>
+
+au BufRead *.py nmap <F7> :w !clear & python<CR>
+au Bufread *.md nmap <F7> :w<CR>:silent !mdpdf % &<CR>:redraw!<CR>
+
 
 if &diff
     cabbrev q qa
@@ -168,23 +135,3 @@ augroup CloseIfOnlyControlWinLeft
     au!
     au BufEnter * call s:CloseIfOnlyControlWinLeft()
 augroup END
-
-function! HighlightRepeats() range
-    let lineCounts = {}
-    let lineNum = a:firstline
-    while lineNum <= a:lastline
-        let lineText = getline(lineNum)
-        if lineText != ""
-            let lineCounts[lineText] = (has_key(lineCounts, lineText) ? lineCounts[lineText] : 0) + 1
-        endif
-        let lineNum = lineNum + 1
-    endwhile
-    exe 'syn clear Repeat'
-    for lineText in keys(lineCounts)
-        if lineCounts[lineText] >= 2
-            exe 'syn match Repeat "^' . escape(lineText, '".\^$*[]') . '$"'
-        endif
-    endfor
-endfunction
-
-command! -range=% HighlightRepeats <line1>,<line2>call HighlightRepeats()
