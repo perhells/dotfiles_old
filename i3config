@@ -202,18 +202,14 @@ bindsym XF86AudioLowerVolume  exec --no-startup-id /usr/local/bin/volume.sh -c d
 bindsym Shift+XF86AudioLowerVolume  exec --no-startup-id /usr/local/bin/volume.sh -c set -i 0
 
 # mute volume
-#bindsym XF86AudioMute exec --no-startup-id amixer -q set Master mute
 bindsym XF86AudioMute exec --no-startup-id /usr/local/bin/volume.sh -c mute
+
 # pause/play/next/previous
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 # Screen brightness
-#bindsym Shift+XF86KbdBrightnessUp exec --no-startup-id xbacklight -inc 10
-#bindsym Shift+XF86KbdBrightnessDown exec --no-startup-id xbacklight -dec 10
-#bindsym $mod+F4 exec --no-startup-id xbacklight -inc 5
-#bindsym $mod+F3 exec --no-startup-id xbacklight -dec 5
 bindsym $mod+F4 exec --no-startup-id /usr/local/bin/backlight.sh -c up
 bindsym $mod+F3 exec --no-startup-id /usr/local/bin/backlight.sh -c down
 
@@ -225,21 +221,16 @@ bindsym XF86KbdBrightnessDown exec --no-startup-id /usr/local/bin/kb-light.py -
 bindsym XF86TouchpadToggle exec --no-startup-id /usr/local/bin/touchpad_toggle.sh
 
 # scrot
-#bindsym Print exec scrot
-bindsym Print exec scrot '%Y-%m-%d_%H:%M:%S_$wx$h.png' -e 'mv $f ~/Pictures/Screenshots/ && xclip -selection clipboard -t image/png ~/Pictures/Screenshots/$f'
-#bindsym Print exec scrot '~/Pictures/Screenshots/%Y-%m-%d_%T_$wx$h.png'
-#bindsym Print exec scrot '~/Dropbox/Photos/Screenshots/%Y-%m-%d_%T_%wx%h.png'
+bindsym Print exec prntscr
 
 # scrot - select window or rectangle
-#bindsym --release Shift+Print exec scrot -s
-bindsym --release Shift+Print exec scrot -s '%Y-%m-%d_%H:%M:%S_$wx$h.png' -e 'mv $f ~/Pictures/Screenshots/ && xclip -selection clipboard -t image/png ~/Pictures/Screenshots/$f'
-#bindsym --release Shift+Print exec scrot -s '~/Pictures/Screenshots/%Y-%m-%d_%T_$wx$h.png'
+bindsym --release Shift+Print exec prntscr -s
 
 # If you want to add drama, press F13
 bindsym F13 exec --no-startup-id /usr/local/bin/sound_effect.sh
 
 # Start dropbox
-exec --no-startup-id dropbox
+#exec --no-startup-id dropbox
 
 # Start Spotify and Slack on correct workspaces
 #for_window [class="Spotify"] move to workspace number 1

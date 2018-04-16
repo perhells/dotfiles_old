@@ -34,6 +34,11 @@ function mkdir; command mkdir -pv $argv; end
 function visudo; sudo EDITOR=vim visudo; end
 function tree; command tree --dirsfirst -C $argv; end
 
+function feh; command feh --auto-zoom $argv;end
+function geet; command git $argv; end
+
+function dots; command dot "$argv" -Tpng -o "$argv".png; feh "$argv".png; end
+
 # Terminal export
 function sbt; export TERM='xterm'; command sbt $argv; export TERM='rxvt-unicode-256color'; end
 
