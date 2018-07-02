@@ -121,6 +121,8 @@ endif
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
+map <C-o> :NERDTreeToggle<CR>
+
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
 
