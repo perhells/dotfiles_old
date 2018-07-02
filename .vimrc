@@ -1,10 +1,9 @@
+source ~/.vim/bundle/vim-pathogen/autoload/pathogen.vim
 if $TERM == 'xterm'
     set t_Co=256
     let g:molokai_original = 1
 endif
 set nocompatible
-set runtimepath+=/home/per/.vim/bundle
-set runtimepath^=/home/per/.vim/bundle/node
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
