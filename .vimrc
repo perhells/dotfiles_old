@@ -5,9 +5,9 @@ endif
 set nocompatible
 set runtimepath+=/home/per/.vim/bundle
 set runtimepath^=/home/per/.vim/bundle/node
-"execute pathogen#infect()
+execute pathogen#infect()
 syntax on
-"filetype plugin indent on
+filetype plugin indent on
 
 autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 autocmd BufRead *.py set nocindent
@@ -118,6 +118,9 @@ else
     autocmd VimEnter * NERDTree
     autocmd VimEnter * wincmd p
 endif
+
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
