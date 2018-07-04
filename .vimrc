@@ -37,9 +37,6 @@ set incsearch		" Incremental search
 set hlsearch        " Highlight matches
 set hidden		    " Hide buffers when they are abandoned
 
-" Disable bells
-set belloff=all
-
 " <Ctrl-l> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 
@@ -53,12 +50,6 @@ set noswapfile
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
-
-"for prefix in ['i', 'n', 'v']
-"    for key in ['<Up>', '<Down>', '<Left>', '<Right>']
-"        exe prefix . "noremap " . key . " <Nop>"
-"    endfor
-"endfor
 
 function! ToggleMouse()
     " check if mouse is enabled
@@ -114,6 +105,7 @@ au BufRead *.py nmap <F7> :w !clear & python<CR>
 au Bufread *.md nmap <F7> :w<CR>:silent !mdpdf % &<CR>:redraw!<CR>
 
 let g:nerdtree_tabs_open_on_console_startup=1
+let g:nerdtree_tabs_smart_startup_focus=2
 
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
