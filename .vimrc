@@ -37,6 +37,9 @@ set incsearch		" Incremental search
 set hlsearch        " Highlight matches
 set hidden		    " Hide buffers when they are abandoned
 
+" Disable bells
+set belloff=all
+
 " <Ctrl-l> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 
@@ -110,18 +113,12 @@ nnoremap <F6> :call ToggleWrap()<CR>
 au BufRead *.py nmap <F7> :w !clear & python<CR>
 au Bufread *.md nmap <F7> :w<CR>:silent !mdpdf % &<CR>:redraw!<CR>
 
-
-if &diff
-    cabbrev q qa
-else
-    autocmd VimEnter * NERDTree
-    autocmd VimEnter * wincmd p
-endif
+let g:nerdtree_tabs_open_on_console_startup=1
 
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
-map <C-o> :NERDTreeToggle<CR>
+map <C-o> :NERDTreeTabsToggle<CR>
 
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
