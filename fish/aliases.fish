@@ -4,6 +4,7 @@ function ea; vim ~/.config/fish/aliases.fish; ra; end
 
 # Git
 function wow; git status; end
+function geet; git $argv; end
 function such; git $argv; end
 function very; git $argv; end
 function many; git $argv; end
@@ -15,36 +16,16 @@ function ssh; export TERM='xterm-256color'; command ssh $argv; export TERM='rxvt
 function ssh-kth; ssh -Y perhells@u-shell.csc.kth.se; end
 function ssh-link-kth; ssh -L 1449:localhost:1449 perhells@u-shell.csc.kth.se; end
 function sftp-kth; sftp perhells@u-shell.csc.kth.se; end
-function ssh-rpi; export TERM='xterm-256color'; ssh per@gysingebryggeri.se; export TERM='rxvt-unicode-256color'; end
-function sftp-rpi; sftp per@gysingebryggeri.se; end
-function usb-serial; sudo screen /dev/ttyUSB0 115200; end
-function ssh-ec2; export TERM='xterm-256color'; ssh -i ~/.ssh/gysinge.pem ec2-user@35.165.89.59; export TERM='rxvt-unicode-256color'; end
-
-# Network
-function pong; ping 8.8.8.8 -c 3; end
-function network; sudo systemctl start NetworkManager; end
 
 # Comfort
 function ..; cd ..; end
 function ls; command ls -lh --group-directories-first --color $argv; end
-function lsc; command ls $argv; end
 function grep; command grep --color=auto $argv; end
 function top; atop; end
-function mkdir; command mkdir -pv $argv; end
 function visudo; sudo EDITOR=vim visudo; end
 function tree; command tree --dirsfirst -C $argv; end
-
 function feh; command feh --auto-zoom $argv;end
-function geet; command git $argv; end
-
 function dots; command dot "$argv" -Tpng -o "$argv".png; feh "$argv".png; end
-
-# Terminal export
-function sbt; export TERM='xterm'; command sbt $argv; export TERM='rxvt-unicode-256color'; end
-
-# Server functionality
-function restart_server; sudo supervisorctl restart maltlager ; sudo systemctl restart nginx; end
-function fix_permissions; sudo chown -R gysinge_maltlager:webapps /webapps; end
 
 # Calls all individual functions for listing and removing saved directories
 function p; p0; p1; p2; p3; p4; p5; p6; p7; p8; p9; end
@@ -116,18 +97,12 @@ function pacman-edit; sudo vim /etc/pacman.d/mirrorlist; end
 function pacnew-edit; sudo vim /etc/pacman.d/mirrorlist.pacnew; end
 function paccopy; sudo cp /etc/pacman.d/mirrorlist.pacnew /etc/pacman.d/mirrorlist; end
 function pacdiff;
-if test (count (diff /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.pacnew)) -gt 0
-    vimdiff /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.pacnew
-else
-    echo "No difference between new and old mirrorlist"
-end;
+    if test (count (diff /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.pacnew)) -gt 0
+        vimdiff /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.pacnew
+    else
+        echo "No difference between new and old mirrorlist"
+    end;
 end
-
-# Remove all docker containers, images, volumes
-function docker-clean; docker stop (docker ps -aq); docker rm (docker ps -aq); docker rmi (docker images -aq) --force; docker volume rm (docker volume ls -q); docker ps -a; docker images -a; docker volume ls; end
-
-# Launch matlab in terminal mode
-function matlab-term; matlab -nosplash -nodesktop; end
 
 # LDAP
 function ldapgroups; ldapsearch -LLL -x -h ldap.dewire.com -b dc=dewire,dc=com member=uid=$argv,ou=people,dc=dewire,dc=com cn; end
