@@ -1,2 +1,4 @@
 #!/bin/bash
+turn_on_gpu
 optirun osbuddy
+turn_off_gpu

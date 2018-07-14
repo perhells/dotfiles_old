@@ -1,7 +1,7 @@
 #!/bin/bash
 # does an update
 echo ":: updating system..."
-yaourt -Syua --noconfirm
+yaourt -Syyua --noconfirm
 echo ":: update complete..."
 #sleep 2s
 # function to check for and remove orphan packages

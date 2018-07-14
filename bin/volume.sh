@@ -69,7 +69,7 @@ if [ "$icon_name" = "" ]; then
     fi
 fi
 
-paplay /usr/share/sounds/gnome/default/alerts/drip.ogg &
+mplayer /usr/share/sounds/gnome/default/alerts/drip.ogg &
 
 notify-send " " -i $icon_name -h int:value:$target_volume -h string:synchronous:volume
 echo $target_volume
