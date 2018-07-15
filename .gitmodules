@@ -1,21 +1,28 @@
 [submodule ".vim/bundle/nerdtree"]
-	path = .vim/bundle/nerdtree
-	url = https://github.com/scrooloose/nerdtree
+    path = .vim/bundle/nerdtree
+    url = https://github.com/scrooloose/nerdtree
+    ignore = dirty
 [submodule ".vim/bundle/vim-colorschemes"]
-	path = .vim/bundle/vim-colorschemes
-	url = https://github.com/flazz/vim-colorschemes
+    path = .vim/bundle/vim-colorschemes
+    url = https://github.com/flazz/vim-colorschemes
+    ignore = dirty
 [submodule ".vim/bundle/vim-pathogen"]
-	path = .vim/bundle/vim-pathogen
-	url = https://github.com/tpope/vim-pathogen
+    path = .vim/bundle/vim-pathogen
+    url = https://github.com/tpope/vim-pathogen
+    ignore = dirty
 [submodule ".vim/bundle/lightline.vim"]
-	path = .vim/bundle/lightline.vim
-	url = https://github.com/itchyny/lightline.vim
+    path = .vim/bundle/lightline.vim
+    url = https://github.com/itchyny/lightline.vim
+    ignore = dirty
 [submodule ".vim/bundle/vim-multiple-cursors"]
-	path = .vim/bundle/vim-multiple-cursors
-	url = https://github.com/terryma/vim-multiple-cursors
+    path = .vim/bundle/vim-multiple-cursors
+    url = https://github.com/terryma/vim-multiple-cursors
+    ignore = dirty
 [submodule ".vim/bundle/vim-startify"]
-	path = .vim/bundle/vim-startify
-	url = https://github.com/mhinz/vim-startify
+    path = .vim/bundle/vim-startify
+    url = https://github.com/mhinz/vim-startify
+    ignore = dirty
 [submodule ".vim/bundle/vim-nerdtree-tabs"]
-	path = .vim/bundle/vim-nerdtree-tabs
-	url = https://github.com/jistr/vim-nerdtree-tabs
+    path = .vim/bundle/vim-nerdtree-tabs
+    url = https://github.com/jistr/vim-nerdtree-tabs
+    ignore = dirty
