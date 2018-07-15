@@ -1,75 +1,71 @@
-#!/bin/sh
-# Original discussion, see https://bbs.archlinux.org/viewtopic.php?id=69589
-# Updated and improved by Per Hellström, perhellsing@gmail.com
+#!/bin/bash
 
-usage="$0 Version $version Help\nDependencies: libnotify, alsa-utils\nusage:\n\t $0  [OPTIONS] -c COMMAND \nCOMMAND:\n-c\tup \n\t\t(increase volume by increment)\n\tdown \n\t\t(decrease volume by increment)\n\tmute \n\t\t(mute volume) \n\nOPTIONS:\n-i\tincrement \n\t\t(the amount of db to increase/decrease)[default:2500] \n-m\tmixer \n\t\t(the device to change)[default:Master]"
+# You can call this script like this:
+# $./volume.sh up
+# $./volume.sh down
+# $./volume.sh mute
 
-command=
-increment=4
-mixer="Master"
+libnotify_id=1
 
-while getopts "c:i:m:h" o
-do case "$o" in
-    c) command=$OPTARG;;
-    i) increment=$OPTARG;;
-    m) mixer=$OPTARG;;
-    h) echo -e "$usage"; exit 0;;
-    ?) echo -e "$usage"; exit 0;;
-esac
-done
+function get_volume {
+    amixer get Master | grep '%' | head -n 1 | cut -d '[' -f 2 | cut -d '%' -f 1
+}
 
-current_volume=$(amixer get Master | grep -m 1 "%]" | cut -d "[" -f2|cut -d "%" -f1)
-icon_name=""
-if [ "$command" = "up" ]; then
-    target_volume=$(($current_volume + increment))
-    if [ "$target_volume" -gt "$((100-increment))" ]; then
-        target_volume=100
-    fi
-    amixer set $mixer $target_volume% unmute > /dev/null
-else
-	if [ "$command" = "down" ]; then
-        target_volume=$(($current_volume - increment))
-        if [ "$target_volume" -lt "$increment" ]; then
-            target_volume=0
-        fi
-        amixer set $mixer $target_volume% unmute > /dev/null
-	else
-		if [ "$command" = "mute" ]; then
-		    if amixer get Master | grep "\[on\]"; then
-                target_volume=0
-                icon_name="notification-audio-volume-muted"
-                amixer set $mixer mute
-            else
-                target_volume=$(amixer set $mixer unmute | grep -m 1 "%]" | cut -d "[" -f2|cut -d "%" -f1)
-		    fi
-		else
-            if [ "$command" = "set" ]; then
-                target_volume=$increment
-                amixer set $mixer $target_volume% unmute > /dev/null
-            else
-                echo -e $usage
-            fi
-        fi
-	fi
-fi
+function is_mute {
+    amixer get Master | grep '%' | grep -oE '[^ ]+$' | grep off > /dev/null
+}
 
-if [ "$icon_name" = "" ]; then
-    if [ "$target_volume" = "0" ]; then
-        icon_name="notification-audio-volume-off"
+function send_notification {
+    volume=$(get_volume)
+    if [ $volume -eq "0" ]; then
+        icon_name="/usr/share/icons/Faba/48x48/notifications/notification-audio-volume-off.svg"
     else
-        if [ "$target_volume" -lt "33" ]; then
-            icon_name="notification-audio-volume-low"
+        if [ $volume -lt "33" ]; then
+            icon_name="/usr/share/icons/Faba/48x48/notifications/notification-audio-volume-low.svg"
         else
-            if [ "$target_volume" -lt "67" ]; then
-                icon_name="notification-audio-volume-medium"
+            if [ $volume -lt "66" ]; then
+                icon_name="/usr/share/icons/Faba/48x48/notifications/notification-audio-volume-medium.svg"
             else
-                icon_name="notification-audio-volume-high"
+                icon_name="/usr/share/icons/Faba/48x48/notifications/notification-audio-volume-high.svg"
             fi
         fi
     fi
-fi
 
-mplayer /usr/share/sounds/gnome/default/alerts/drip.ogg &
+    echo $icon_name
 
-notify-send " " -i $icon_name -h int:value:$target_volume -h string:synchronous:volume
-echo $target_volume
+    if [ $volume -lt "10" ]; then
+        space="      "
+    else
+        if [ $volume -lt "100" ]; then
+            space="     "
+        else
+            space="    "
+        fi
+    fi
+    bar=$(seq -s "─" $(($volume / 5)) | sed 's/[0-9]//g')
+    dunstify -i "$icon_name" -r "$libnotify_id" "$volume$space$bar" 
+}
+
+case $1 in
+    up)
+	# Set the volume on (if it was muted)
+	amixer -D pulse set Master on > /dev/null
+	# Up the volume (+ 5%)
+	amixer -D pulse sset Master 5%+ > /dev/null
+	send_notification
+	;;
+    down)
+	amixer -D pulse set Master on > /dev/null
+	amixer -D pulse sset Master 5%- > /dev/null
+	send_notification
+	;;
+    mute)
+    	# Toggle mute
+	amixer -D pulse set Master 1+ toggle > /dev/null
+	if is_mute ; then
+	    dunstify -i audio-volume-muted -t 8 -r 2593 -u normal "Mute"
+	else
+	    send_notification
+	fi
+	;;
+esac
