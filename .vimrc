@@ -14,11 +14,12 @@ autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
 
 autocmd FileType markdown set wrap|set linebreak
 
-set smartindent
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
 set expandtab
+set smartindent
+set smarttab
+set shiftwidth=4
 set nowrap
 set number
 set backspace=2
