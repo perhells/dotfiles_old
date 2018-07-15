@@ -30,9 +30,6 @@ function send_notification {
             fi
         fi
     fi
-
-    echo $icon_name
-
     if [ $volume -lt "10" ]; then
         space="      "
     else
@@ -57,6 +54,16 @@ case $1 in
     down)
 	amixer -D pulse set Master on > /dev/null
 	amixer -D pulse sset Master 5%- > /dev/null
+	send_notification
+	;;
+    max)
+	amixer -D pulse set Master on > /dev/null
+	amixer -D pulse sset Master 100% > /dev/null
+	send_notification
+	;;
+    min)
+	amixer -D pulse set Master on > /dev/null
+	amixer -D pulse sset Master 0% > /dev/null
 	send_notification
 	;;
     mute)

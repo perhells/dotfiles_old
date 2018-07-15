@@ -7,13 +7,13 @@
 libnotify_id=2
 
 function increase_brightness {
-    new_volume=$(echo "($(xbacklight)+15)/10*10" | bc)
-    xbacklight -set "$new_volume%"
+    brightness=$(echo "($(xbacklight)+15)/10*10" | bc)
+    xbacklight -set "$brightness%"
 }
 
 function decrease_brightness {
-    new_volume=$(echo "($(xbacklight)-5)/10*10" | bc)
-    xbacklight -set "$new_volume%"
+    brightness=$(echo "($(xbacklight)-5)/10*10" | bc)
+    xbacklight -set "$brightness%"
 }
 
 function get_brightness {
