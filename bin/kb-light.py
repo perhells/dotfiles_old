@@ -5,8 +5,20 @@ from sys import argv
 from subprocess import call
 import dbus
 
+libnotify_id = 3
+
 def print_kbd_light(value):
-    call(["notify-send", " ", "-i", "keyboard", "-h", "int:value:" + str(int(value)), "-h", "string:synchronous:backlight"])
+    icon_name = "/usr/share/icons/Faba/48x48/notifications/notification-keyboard-brightness.svg"
+    brightness = int(value)
+    if brightness < 10:
+        space = "      "
+    elif brightness < 100:
+        space = "     "
+    else:
+        space = "    "
+    bar = "".join(["─" for x in range(1, int(brightness / 5))])
+    message = "%s%s%s" % (brightness, space, bar)
+    call(["dunstify", "-i", icon_name, "-r", str(libnotify_id), message])
 
 def kb_light_set(delta):
     bus = dbus.SystemBus()

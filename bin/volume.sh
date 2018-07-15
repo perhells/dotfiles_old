@@ -63,7 +63,8 @@ case $1 in
     	# Toggle mute
 	amixer -D pulse set Master 1+ toggle > /dev/null
 	if is_mute ; then
-	    dunstify -i audio-volume-muted -t 8 -r 2593 -u normal "Mute"
+            icon_name="/usr/share/icons/Faba/48x48/notifications/notification-audio-volume-off.svg"
+	    dunstify -i "$icon_name" -r "$libnotify_id" "Mute"
 	else
 	    send_notification
 	fi

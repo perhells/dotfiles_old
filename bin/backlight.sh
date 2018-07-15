@@ -1,26 +1,48 @@
-#!/bin/sh
+#!/bin/bash
 
-command=
-unused_increment=
-increment=8
+# You can call this script like this:
+# $./backlight.sh up
+# $./backlight.sh down
 
-while getopts "c:i" o
-do case "$o" in
-    c) command=$OPTARG;;
-    i) increment=$OPTARG;;
+libnotify_id=2
+
+function increase_brightness {
+    new_volume=$(echo "($(xbacklight)+15)/10*10" | bc)
+    xbacklight -set "$new_volume%"
+}
+
+function decrease_brightness {
+    new_volume=$(echo "($(xbacklight)-5)/10*10" | bc)
+    xbacklight -set "$new_volume%"
+}
+
+function get_brightness {
+    echo "($(xbacklight)+5)/10*10" | bc
+}
+
+function send_notification {
+    brightness=$(get_brightness)
+    icon_name="/usr/share/icons/Faba/48x48/notifications/notification-display-brightness.svg"
+    if [ $brightness -lt "10" ]; then
+        space="      "
+    else
+        if [ $brightness -lt "100" ]; then
+            space="     "
+        else
+            space="    "
+        fi
+    fi
+    bar=$(seq -s "─" $(($brightness / 5)) | sed 's/[0-9]//g')
+    dunstify -i "$icon_name" -r "$libnotify_id" "$brightness$space$bar" 
+}
+
+case $1 in
+    up)
+        increase_brightness
+	send_notification
+	;;
+    down)
+        decrease_brightness
+	send_notification
+	;;
 esac
-done
-
-if [ "$command" = "up" ]; then
-    $(xbacklight -inc $increment)
-else
-	if [ "$command" = "down" ]; then
-        $(xbacklight -dec $increment)
-	fi
-fi
-
-display_brightness=$(xbacklight)
-
-icon_name="display-brightness-symbolic"
-
-notify-send " " -i $icon_name -h int:value:$display_brightness -h string:synchronous:brightness
