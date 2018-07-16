@@ -183,7 +183,18 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
         position top
-        font pango:DejaVu Sans Mono, Icons 8
+        font pango:DejaVu Sans Mono, Icons 10
+
+        colors {
+            background #262626
+            statusline #00A5FF #that neon blue
+            separator #666666
+
+            focused_workspace  #666666 #666666 #ffffff
+            active_workspace   #555555 #555555 #ffffff
+            inactive_workspace #333333 #333333 #888888
+            urgent_workspace   #333333 #900000 #ffffff
+        }
 }
 
 new_window none
