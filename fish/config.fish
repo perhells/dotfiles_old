@@ -5,7 +5,8 @@ if status -l; and test -r /etc/locale.conf
     end </etc/locale.conf
 end
 
-#set -gx PATH /home/per/.npm-global/bin $PATH
+set NPM_BIN "$HOME/.npm-packages/bin"
+test -d "$NPM_BIN"; and set PATH $PATH $NPM_BIN
 
 # start X at login
 if status --is-login

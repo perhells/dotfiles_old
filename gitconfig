@@ -1,20 +1,20 @@
 [user]
-	email = user@host.com
-	name = User Name
+    email = user@host.com
+    name = User Name
 [push]
-	default = simple
+    default = simple
 [diff]
-	tool = vimdiff
+    tool = vimdiff
 [color]
-	ui = always
-	branch = always
-	diff = always
-	interactive = always
-	status = always
-	grep = always
-	pager = true
-	decorate = always
-	showbranch = always
+    ui = always
+    branch = always
+    diff = always
+    interactive = always
+    status = always
+    grep = always
+    pager = true
+    decorate = always
+    showbranch = always
 [color "status"]
     added = green
     changed = red bold
@@ -22,12 +22,12 @@
 [color "branch"]
     remote = yellow
 [branch]
-	autosetuprebase = always
+    autosetuprebase = always
 [alias]
     wdiff = diff --color-words
     wshow = show --color-words
-	lg = log --oneline --decorate --color --graph
+    lg = log --oneline --decorate --color --graph
 [merge]
-	conflictstyle = diff3
+    conflictstyle = diff3
 [mergetool]
-	prompt = false
+    prompt = false
