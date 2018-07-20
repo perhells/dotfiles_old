@@ -8,6 +8,14 @@ execute pathogen#infect()
 syntax on
 filetype plugin indent on
 
+map <Esc>[27;5;9~ <C-Tab>
+map <Esc>[27;6;9~ <C-S-Tab>
+
+nmap <C-Tab> :tabnext<cr><C-l>
+imap <C-Tab> <ESC>:tabnext<cr><C-l>
+nmap <C-S-Tab> :tabprevious<cr><C-l>
+imap <C-S-Tab> <ESC>:tabprevious<cr><C-l>
+
 autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 autocmd BufRead *.py set nocindent
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``

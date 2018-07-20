@@ -30,3 +30,11 @@
     path = .vim/bundle/indent-detector.vim
     url = https://github.com/luochen1990/indent-detector.vim
     ignore = dirty
+[submodule ".vim/bundle/vim-javascript"]
+    path = .vim/bundle/vim-javascript
+    url = https://github.com/pangloss/vim-javascript
+    ignore = dirty
+[submodule ".vim/bundle/vim-jsx"]
+    path = .vim/bundle/vim-jsx
+    url = https://github.com/mxw/vim-jsx
+    ignore = dirty
