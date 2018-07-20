@@ -11,10 +11,39 @@ filetype plugin indent on
 map <Esc>[27;5;9~ <C-Tab>
 map <Esc>[27;6;9~ <C-S-Tab>
 
-nmap <C-Tab> :tabnext<cr><C-l>
-imap <C-Tab> <ESC>:tabnext<cr><C-l>
-nmap <C-S-Tab> :tabprevious<cr><C-l>
-imap <C-S-Tab> <ESC>:tabprevious<cr><C-l>
+nmap <C-Tab> :tabnext<CR>
+imap <C-Tab> <ESC>:tabnext<CR>
+nmap <C-S-Tab> :tabprevious<CR>
+imap <C-S-Tab> <ESC>:tabprevious<CR>
+
+map <Esc>1 <A-1>
+map <Esc>2 <A-2>
+map <Esc>3 <A-3>
+map <Esc>4 <A-4>
+map <Esc>5 <A-5>
+map <Esc>6 <A-6>
+map <Esc>7 <A-7>
+map <Esc>8 <A-8>
+map <Esc>9 <A-9>
+
+nmap <A-1> 1gt
+imap <A-1> <ESC>1gt
+nmap <A-2> 2gt
+imap <A-2> <ESC>2gt
+nmap <A-3> 3gt
+imap <A-3> <ESC3>gt
+nmap <A-4> 4gt
+imap <A-4> <ESC>4gt
+nmap <A-5> 5gt
+imap <A-5> <ESC>5gt
+nmap <A-6> 6gt
+imap <A-6> <ESC>6gt
+nmap <A-7> 7gt
+imap <A-7> <ESC>7gt
+nmap <A-8> 8gt
+imap <A-8> <ESC>8gt
+nmap <A-9> :silent tablast<CR>
+imap <A-9> <ESC>:tsilent ablast<CR>
 
 autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 autocmd BufRead *.py set nocindent
