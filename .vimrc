@@ -1,5 +1,5 @@
 source ~/.vim/bundle/vim-pathogen/autoload/pathogen.vim
-if $TERM == 'xterm'
+if $TERM == "xterm"
     set t_Co=256
     let g:molokai_original = 1
 endif
@@ -94,7 +94,7 @@ endif
 
 function! ToggleMouse()
     " check if mouse is enabled
-    if &mouse == 'a'
+    if &mouse == "a"
         " disable mouse
         set mouse=
         echo "Mouse disabled"
@@ -152,7 +152,9 @@ let g:nerdtree_tabs_smart_startup_focus=2
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
-map <C-o> :NERDTreeTabsToggle<CR>
+let g:multi_cursor_quit_key = "<Esc>"
+
+map <silent> <C-o> :NERDTreeTabsToggle<CR>
 
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
@@ -162,7 +164,7 @@ function! s:CloseIfOnlyControlWinLeft()
         return
     endif
     if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)
-        \ || &buftype == 'quickfix'
+        \ || &buftype == "quickfix"
     q
     endif
 endfunction
