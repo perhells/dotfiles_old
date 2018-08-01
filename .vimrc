@@ -53,6 +53,9 @@ autocmd FileType markdown set wrap|set linebreak
 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
+" Save as root with :Sw
+command! -nargs=0 Sw w !sudo tee % > /dev/null
+
 set expandtab
 set smartindent
 set smarttab
