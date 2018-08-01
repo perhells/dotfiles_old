@@ -8,11 +8,11 @@
 libnotify_id=1
 
 function get_volume {
-    amixer get Master | grep '%' | head -n 1 | cut -d '[' -f 2 | cut -d '%' -f 1
+    amixer -D pulse get Master | grep '%' | head -n 1 | cut -d '[' -f 2 | cut -d '%' -f 1
 }
 
 function is_mute {
-    amixer get Master | grep '%' | grep -oE '[^ ]+$' | grep off > /dev/null
+    amixer -D pulse get Master | grep '%' | grep -oE '[^ ]+$' | grep off > /dev/null
 }
 
 function send_notification {
@@ -45,35 +45,32 @@ function send_notification {
 
 case $1 in
     up)
-	# Set the volume on (if it was muted)
-	amixer -D pulse set Master on > /dev/null
-	# Up the volume (+ 5%)
-	amixer -D pulse sset Master 5%+ > /dev/null
-	send_notification
-	;;
+        amixer -D pulse set Master on > /dev/null
+        amixer -D pulse set Master 5%+ > /dev/null
+        send_notification
+        ;;
     down)
-	amixer -D pulse set Master on > /dev/null
-	amixer -D pulse sset Master 5%- > /dev/null
-	send_notification
-	;;
+        amixer -D pulse set Master on > /dev/null
+        amixer -D pulse set Master 5%- > /dev/null
+        send_notification
+        ;;
     max)
-	amixer -D pulse set Master on > /dev/null
-	amixer -D pulse sset Master 100% > /dev/null
-	send_notification
-	;;
+        amixer -D pulse set Master on > /dev/null
+        amixer -D pulse set Master 100% > /dev/null
+        send_notification
+        ;;
     min)
-	amixer -D pulse set Master on > /dev/null
-	amixer -D pulse sset Master 0% > /dev/null
-	send_notification
-	;;
+        amixer -D pulse set Master on > /dev/null
+        amixer -D pulse set Master 0% > /dev/null
+        send_notification
+        ;;
     mute)
-    	# Toggle mute
-	amixer -D pulse set Master 1+ toggle > /dev/null
-	if is_mute ; then
+        amixer -D pulse set Master 1+ toggle > /dev/null
+        if is_mute ; then
             icon_name="/usr/share/icons/Faba/48x48/notifications/notification-audio-volume-off.svg"
-	    dunstify -i "$icon_name" -r "$libnotify_id" "Mute"
-	else
-	    send_notification
-	fi
-	;;
+            dunstify -i "$icon_name" -r "$libnotify_id" "Mute"
+        else
+            send_notification
+        fi
+        ;;
 esac

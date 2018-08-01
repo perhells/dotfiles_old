@@ -2,6 +2,7 @@
 function ra; . ~/.config/fish/aliases.fish; end
 function ea; vim ~/.config/fish/aliases.fish; ra; end
 
+function vim; command vim -X $argv; end
 # Git
 function wow; git status; end
 function geet; git $argv; end

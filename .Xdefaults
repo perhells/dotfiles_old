@@ -5,7 +5,7 @@ URxvt*internalBorder    : 0
 
 URxvt*iconFile          : /usr/share/icons/gnome/256x256/apps/gnome-terminal.png
 
-URxvt.keysym.C-Tab: \033[27;5;9~
+URxvt.keysym.C-Tab      : \033[27;5;9~
 URxvt.keysym.Control-Shift-ISO_Left_Tab: \033[27;6;9~
 
 ! disable ctrl-shift
@@ -30,7 +30,7 @@ URxvt*scrollBar_floating: false
 URxvt*scrollBar_right   : true
 ! scrollbar style
 URxvt*scrollstyle       : plain
-! scrollbar disabel
+! scrollbar disable
 URxvt*scrollBar         : false
 
 URxvt*scrollTtyOutput   : false

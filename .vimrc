@@ -143,7 +143,8 @@ nnoremap <F5> :call ToggleWhitespace()<CR>
 nnoremap <F6> :call ToggleWrap()<CR>
 
 au BufRead *.py nmap <F7> :w !clear & python<CR>
-au Bufread *.md nmap <F7> :w<CR>:silent !mdpdf % &<CR>:redraw!<CR>
+"au Bufread *.md nmap <F7> :w<CR>:silent !mdpdf % &<CR>:redraw!<CR>
+au Bufread *.md nmap <F7> :w<CR>:silent !grip --quiet --export %<CR>:redraw!<CR>
 
 let g:nerdtree_tabs_open_on_console_startup=1
 let g:nerdtree_tabs_smart_startup_focus=2
