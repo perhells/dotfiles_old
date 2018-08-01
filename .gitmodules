@@ -38,3 +38,21 @@
     path = .vim/bundle/vim-jsx
     url = https://github.com/mxw/vim-jsx
     ignore = dirty
+[submodule ".vim/bundle/vim-angular"]
+	path = .vim/bundle/vim-angular
+	url = git://github.com/burnettk/vim-angular.git
+[submodule ".vim/bundle/javascript-libraries-syntax.vim"]
+	path = .vim/bundle/javascript-libraries-syntax.vim
+	url = https://github.com/othree/javascript-libraries-syntax.vim
+[submodule ".vim/bundle/angular-vim-snippets"]
+	path = .vim/bundle/angular-vim-snippets
+	url = https://github.com/matthewsimo/angular-vim-snippets
+[submodule ".vim/bundle/jasmine.vim"]
+	path = .vim/bundle/jasmine.vim
+	url = https://github.com/claco/jasmine.vim
+[submodule ".vim/bundle/syntastic"]
+	path = .vim/bundle/syntastic
+	url = https://github.com/scrooloose/syntastic
+[submodule ".vim/bundle/typescript-vim"]
+	path = .vim/bundle/typescript-vim
+	url = https://github.com/leafgarland/typescript-vim
