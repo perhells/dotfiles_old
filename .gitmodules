@@ -39,20 +39,26 @@
     url = https://github.com/mxw/vim-jsx
     ignore = dirty
 [submodule ".vim/bundle/vim-angular"]
-	path = .vim/bundle/vim-angular
-	url = git://github.com/burnettk/vim-angular.git
+    path = .vim/bundle/vim-angular
+    url = git://github.com/burnettk/vim-angular.git
+    ignore = dirty
 [submodule ".vim/bundle/javascript-libraries-syntax.vim"]
-	path = .vim/bundle/javascript-libraries-syntax.vim
-	url = https://github.com/othree/javascript-libraries-syntax.vim
+    path = .vim/bundle/javascript-libraries-syntax.vim
+    url = https://github.com/othree/javascript-libraries-syntax.vim
+    ignore = dirty
 [submodule ".vim/bundle/angular-vim-snippets"]
-	path = .vim/bundle/angular-vim-snippets
-	url = https://github.com/matthewsimo/angular-vim-snippets
+    path = .vim/bundle/angular-vim-snippets
+    url = https://github.com/matthewsimo/angular-vim-snippets
+    ignore = dirty
 [submodule ".vim/bundle/jasmine.vim"]
-	path = .vim/bundle/jasmine.vim
-	url = https://github.com/claco/jasmine.vim
+    path = .vim/bundle/jasmine.vim
+    url = https://github.com/claco/jasmine.vim
+    ignore = dirty
 [submodule ".vim/bundle/syntastic"]
-	path = .vim/bundle/syntastic
-	url = https://github.com/scrooloose/syntastic
+    path = .vim/bundle/syntastic
+    url = https://github.com/scrooloose/syntastic
+    ignore = dirty
 [submodule ".vim/bundle/typescript-vim"]
-	path = .vim/bundle/typescript-vim
-	url = https://github.com/leafgarland/typescript-vim
+    path = .vim/bundle/typescript-vim
+    url = https://github.com/leafgarland/typescript-vim
+    ignore = dirty

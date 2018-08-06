@@ -1,4 +1,4 @@
-URxvt*font              : xft:monospace:pixelsize=20
+URxvt*font              : xft:DejaVu Sans Mono:pixelsize=20
 URxvt*borderLess        : false
 URxvt*externalBorder    : 0
 URxvt*internalBorder    : 0
@@ -37,8 +37,8 @@ URxvt*scrollTtyOutput   : false
 URxvt*scrollWithBuffer  : true
 URxvt*scrollTtyKeypress : true
 
-urxvt*depth             : 32
-urxvt*background        : rgba:0000/0000/0200/c800
+URxvt*depth             : 32
+!URxvt*background        : rgba:0000/0000/0200/c800
 
 URxvt*cursorBlink       : false
 URxvt*inheritPixmap     : false
