@@ -132,7 +132,7 @@ function! ToggleWrap()
     endif
 endfunc
 
-nnoremap <F2> :!echo -e "F3: Toggle paste\nF4: Toggle mouse\nF5: Toggle whitespace\nF6: Toggle wrap\nF7: Exec file"<CR>
+nnoremap <F2> :echon "F3: Toggle paste\nF4: Toggle mouse\nF5: Toggle whitespace\nF6: Toggle wrap\nF7: Exec file"<CR>
 
 set showmode
 set pastetoggle=<F3>

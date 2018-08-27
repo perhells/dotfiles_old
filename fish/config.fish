@@ -5,8 +5,12 @@ if status -l; and test -r /etc/locale.conf
     end </etc/locale.conf
 end
 
+# Change NPM path
 set NPM_BIN "$HOME/.npm-packages/bin"
 test -d "$NPM_BIN"; and set PATH $PATH $NPM_BIN
+
+# Auto completion for aws-cli
+test -x (which aws_completer); and complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
 
 # start X at login
 if status --is-login
@@ -20,9 +24,11 @@ if test -f ~/.config/fish/aliases.fish
     . ~/.config/fish/aliases.fish
 end
 
+# Disable greeting on shell start
 function fish_greeting
 end
 
+# Display home as "~"
 function prompt_dir
     if test $PWD != $HOME
         printf "%s" (basename $PWD)
@@ -31,6 +37,7 @@ function prompt_dir
     end
 end
 
+# Displays repository information if in a git folder
 function git_branch
     #set -l git_branches (git branch -l ^/dev/null | sed -e "s/^\* //")
     set -l git_branches (git rev-parse --abbrev-ref HEAD ^/dev/null)
@@ -52,6 +59,7 @@ function git_branch
     end
 end
 
+# Clean left prompt with user, hostname and cwd
 function fish_prompt
     set -l infocolor 4ca4b5
     set -l delimcolor blue
@@ -68,6 +76,7 @@ function fish_prompt
     echo -n "❯ "
 end
 
+# Right prompt consisting of git info and bg jobs
 function fish_right_prompt
     set -l delimcolor blue
     set -l infocolor 4ca4b5

@@ -233,11 +233,15 @@ bar {
     }
 }
 
+for_window [class="Solaar"] floating enable
 for_window [class="Pavucontrol"] floating enable
+for_window [class="Nm-connection-editor"] floating enable
 new_window none
 new_float none
 focus_follows_mouse no
 mouse_warping none
+
+bindsym $mod+m exec --no-startup-id /usr/local/bin/toggle_monitor.sh
 
 # Multimedia keys
 # increase volume
@@ -286,10 +290,11 @@ bindsym F13 exec --no-startup-id /usr/local/bin/sound_effect.sh
 #exec --no-startup-id dropbox
 
 # Start Spotify and Slack on correct workspaces
-#for_window [class="Spotify"] move to workspace number 1
-#for_window [class="Slack"] move to workspace number 2
-#exec --no-startup-id spotify
-#exec --no-startup-id slack
+for_window [class="Spotify"] move to workspace number 1
+for_window [class="Slack"] move to workspace number 3
+exec --no-startup-id spotify
+exec --no-startup-id slack
 
 # Initial workspace
-#exec --no-startup-id i3-msg 'workspace number 3'
+exec --no-startup-id i3-msg 'workspace number 2'
+exec --no-startup-id google-chrome

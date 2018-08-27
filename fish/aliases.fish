@@ -29,6 +29,9 @@ function feh; command feh --auto-zoom $argv;end
 function geet; command git $argv; end
 function dots; command dot "$argv" -Tpng -o "$argv".png; feh "$argv".png; end
 
+# Simple python server with redirect
+function pyserver; echo -e "Starting python server as background process in current directory\nLogging to server.log\n(Stop by bringing process to foreground using fg then interupt, or kill)"; python3 -u -m http.server >> server.log 2>&1 &; end
+
 # Calls all individual functions for listing and removing saved directories
 function p; p0; p1; p2; p3; p4; p5; p6; p7; p8; p9; end
 function rA; r0; r1; r2; r3; r4; r5; r6; r7; r8; r9; end
